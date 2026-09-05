@@ -1,8 +1,8 @@
 "use client";
 
-import BackButton from "@/components/backButton";
-import Button from "@/components/button";
-import UploadSection from "@/components/uploadSection";
+import BackButton from "@/components/customElements/backButton";
+import Button from "@/components/customElements/button";
+import UploadSection from "@/components/customElements/uploadSection";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 

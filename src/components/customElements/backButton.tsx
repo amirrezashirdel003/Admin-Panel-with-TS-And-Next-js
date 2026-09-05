@@ -3,7 +3,7 @@ import React from "react";
 
 type BackButtonProps = {
   children: React.ReactNode;
-  className: string;
+  className?: string;
 };
 const BackButton = ({ children, className = "" }: BackButtonProps) => {
   const router = useRouter();

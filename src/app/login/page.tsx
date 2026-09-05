@@ -1,42 +1,22 @@
 "use client";
-import Button from "@/components/button";
-import { isAuthenticated, saveToken } from "@/lib/auth";
-import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+
+import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
+import Button from "@/components/customElements/button";
+import { useLogin } from "@/hooks/useLogin";
+import type { Credentials } from "@/services/authService";
 
 export default function Login() {
-  const initialState = {
-    email: "",
-    password: "",
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Credentials>();
 
-  const [formValues, setFormValues] = React.useState(initialState);
+  const { mutate, isPending, isError, error } = useLogin();
 
-  const navigate = useRouter();
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
-
-  const utf8ToBase64 = (str: string) => {
-    return btoa(unescape(encodeURIComponent(str)));
-  };
-
-  useEffect(() => {
-    if (isAuthenticated()) {
-      navigate.push("/dashboard");
-    }
-  }, [navigate]);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const fakePayload = { username: formValues.email };
-    const fakeToken = `header.${utf8ToBase64(JSON.stringify(fakePayload))}.signature`;
-
-    saveToken(fakeToken);
-    navigate.push("/dashboard");
+  const onSubmit = (data: Credentials) => {
+    mutate(data);
   };
 
   return (
@@ -68,7 +48,6 @@ export default function Login() {
             <div className="text-[22px] font-bold ">
               <span>ساکولنت</span>
             </div>
-
             <p className="text-secondary mt-0.5 text-[13px]">
               پنل مدیریت گیاهان و مطالب
             </p>
@@ -77,21 +56,30 @@ export default function Login() {
 
         <form
           dir="rtl"
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           className="bg-bgbox py-8.25 px-6.5 rounded-[22px] cardShadow border-border border w-100 "
         >
           <div className="font-bold mb-5 text-[16px]">ورود به حساب</div>
+
           <label className="font-semibold text-[13px] mb-1.75 block text-textcolor ">
             ایمیل
           </label>
           <input
             type="email"
             placeholder="admin@golkhane.ir"
-            className="border border-border  w-full py-3 px-3.5 bg-bginput mb-4 rounded-xl text-[14px] focus:border focus:border-black "
-            name="email"
-            value={formValues.email}
-            onChange={handleChange}
+            className="border border-border  w-full py-3 px-3.5 bg-bginput mb-1 rounded-xl text-[14px] focus:border focus:border-black "
+            {...register("email", {
+              required: "ایمیل الزامی است",
+              pattern: {
+                value: /^\S+@\S+\.\S+$/,
+                message: "فرمت ایمیل معتبر نیست",
+              },
+            })}
           />
+          {errors.email && (
+            <p className="text-exit text-[12px] mb-3">{errors.email.message}</p>
+          )}
+
           <label className="font-semibold text-[13px] mb-1.75 block text-textcolor ">
             رمز عبور
           </label>
@@ -99,20 +87,34 @@ export default function Login() {
             type="password"
             placeholder="••••••••"
             className="border border-border w-full py-3 px-3.5 bg-bginput  rounded-xl text-[14px] focus:border focus:border-black "
-            name="password"
-            value={formValues.password}
-            onChange={handleChange}
+            {...register("password", {
+              required: "رمز عبور الزامی است",
+              minLength: {
+                value: 6,
+                message: "رمز عبور باید حداقل ۶ کاراکتر باشد",
+              },
+            })}
           />
+          {errors.password && (
+            <p className="text-exit text-[12px] mt-1.25">
+              {errors.password.message}
+            </p>
+          )}
+
           <Button
             type="submit"
             Component="button"
-            className="flex w-full items-center justify-center mt-5.5 p-3.25 text-[15px] text-center"
+            disabled={isPending}
+            className="flex w-full items-center justify-center mt-5.5 p-3.25 text-[15px] text-center disabled:opacity-60"
           >
-            ورود
+            {isPending ? "در حال ورود..." : "ورود"}
           </Button>
-          <div className="mt-4 text-[12px] text-center text-accent ">
-            هر ایمیل و رمزی برای نمایش کار می‌کند
-          </div>
+
+          {isError && (
+            <div className="mt-4 text-[12px] text-center text-exit">
+              {(error as Error)?.message || "ایمیل یا رمز عبور اشتباه است"}
+            </div>
+          )}
         </form>
       </motion.div>
     </div>

@@ -1,6 +1,6 @@
 "use client";
-import BackButton from "@/components/backButton";
-import Button from "@/components/button";
+import BackButton from "@/components/customElements/backButton";
+import Button from "@/components/customElements/button";
 import { plantsData } from "@/data/data";
 import Link from "next/link";
 import { useParams } from "next/navigation";

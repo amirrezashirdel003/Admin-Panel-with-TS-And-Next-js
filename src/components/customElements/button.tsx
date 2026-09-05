@@ -3,16 +3,15 @@ import React from "react";
 type ButtonProps = {
   children: React.ReactNode;
   className?: string;
-  Component: React.ElementType;
-  [key: string]: unknown;
+  Component?: React.ElementType;
 };
 
 function Button({
   children,
   className = "",
-  Component = "a",
+  Component = "button",
   ...props
-}: ButtonProps) {
+}: ButtonProps & Record<string, unknown>) {
   return (
     <Component
       className={`bg-primary font-bold rounded-xl text-textwhite border border-border cursor-pointer hover:bg-[rgb(76,93,46)] ${className}`}
