@@ -1,3 +1,4 @@
+import axios from "axios";
 import axiosInstance from "./axiosInstance";
 
 export type Credentials = {
@@ -6,7 +7,7 @@ export type Credentials = {
 };
 
 export const login = async (credentials: Credentials) => {
-  const response = await axiosInstance.post("/api/admin/login", credentials);
+  const response = await axios.post("/api/login", credentials);
   return response.data;
 };
 
