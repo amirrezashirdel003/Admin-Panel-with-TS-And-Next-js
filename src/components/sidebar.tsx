@@ -1,3 +1,4 @@
+"use client";
 import { getUserName, removeToken } from "@/lib/auth";
 import ContentsIcon from "../../public/icons/contentsIcon";
 import DashboardIcon from "../../public/icons/dashbordicon";
