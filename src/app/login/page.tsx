@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import Button from "@/components/customElements/button";
-import { useLogin } from "@/hooks/useLogin";
+import { useLogin } from "@/hooks/useAuth";
 import type { Credentials } from "@/services/authService";
 
 export default function Login() {

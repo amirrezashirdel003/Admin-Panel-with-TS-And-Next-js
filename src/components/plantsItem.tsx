@@ -11,7 +11,7 @@ type PlantsItemProps = {
   keeping: string;
   light: string;
   irrigation: string;
-  id: number;
+  id: string;
 };
 
 const PlantsItem = ({

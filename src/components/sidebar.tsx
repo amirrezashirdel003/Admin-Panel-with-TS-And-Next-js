@@ -84,7 +84,7 @@ const Sidebar = () => {
             <div className="flex-1 ">
               <div className="font-semibold text-[13px] ">مدیر گلخانه</div>
               <div className="text-[11px] text-accent  ">
-                <div className="pt-0.5">{getUserName()}</div>
+                {/* <div className="pt-0.5">{getUserName()}</div> */}
               </div>
             </div>
           </div>
