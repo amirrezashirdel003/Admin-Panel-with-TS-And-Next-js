@@ -2,6 +2,7 @@
 import BackButton from "@/components/customElements/backButton";
 import Button from "@/components/customElements/button";
 import UploadSection from "@/components/customElements/uploadSection";
+import PlantForm from "@/components/plants/plantForm";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -34,6 +35,7 @@ const NewPlant = () => {
 
   return (
     <div className="max-w-250 w-full">
+      <PlantForm />
       <div className="flex items-center justify-between gap-4 mb-6 ">
         <div className="flex items-center gap-3.5">
           <BackButton className="size-10 flex items-center justify-center ">

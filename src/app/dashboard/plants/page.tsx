@@ -1,9 +1,9 @@
 "use client";
 
 import HeadSection from "@/components/headSection";
-import PlantsItem from "@/components/plantsItem";
 import Table from "@/components/customElements/table";
 import { usePlants } from "@/hooks/usePlants";
+import PlantsItem from "@/components/plants/plantsItem";
 
 type Plant = {
   id: string;
@@ -89,7 +89,7 @@ const PlantsList = () => {
                 keeping={row.keeping}
                 light={row.light}
                 irrigation={row.irrigation}
-                id={row.slug}
+                slug={row.slug}
               />
             );
           })}
