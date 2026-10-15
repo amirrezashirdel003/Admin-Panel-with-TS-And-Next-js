@@ -1,16 +1,16 @@
 import type { PlantFormValues } from "@/schemas/plantSchema";
 import axiosInstance from "./axiosInstance";
+import { PlantPayload } from "@/lib/plantMappers";
 
 export const getPlants = async () => {
   const response = await axiosInstance.get("/api/plants");
   return response.data;
 };
 
-export const createPlant = async (plantData: PlantFormValues) => {
+export const createPlant = async (plantData: PlantPayload) => {
   const response = await axiosInstance.post("/api/plants", plantData);
   return response.data;
 };
-
 export const deletePlant = async (slug: string) => {
   const response = await axiosInstance.delete(`/api/plants/${slug}`);
   return response.data;
@@ -26,7 +26,7 @@ export const updatePlant = async ({
   plantData,
 }: {
   slug: string;
-  plantData: PlantFormValues;
+  plantData: PlantPayload;
 }) => {
   const response = await axiosInstance.put(`/api/plants/${slug}`, plantData);
   return response.data;

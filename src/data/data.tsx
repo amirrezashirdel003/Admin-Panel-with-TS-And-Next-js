@@ -342,4 +342,24 @@ const DashboardStats = {
   },
 };
 
+export const careLevelOptions = [
+  { id: "easy", name: "آسان" },
+  { id: "medium", name: "متوسط" },
+  { id: "hard", name: "پیشرفته" },
+];
+
+export const lightOptions = [
+  { id: "partial_shade", name: "نیم سایه" },
+  { id: "medium", name: "متوسط" },
+  { id: "high", name: "زیاد" },
+  { id: "full", name: "کامل" },
+];
+
+export const wateringOptions = [
+  { id: "very_low", name: "خیلی کم" },
+  { id: "low", name: "کم" },
+  { id: "medium", name: "متوسط" },
+  { id: "high", name: "زیاد" },
+];
+
 export default DashboardStats;

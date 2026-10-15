@@ -14,3 +14,8 @@ export const articlesKeys = {
   lists: () => [...articlesKeys.all, "list"],
   detail: (slug: string) => [...articlesKeys.all, "detail", slug],
 };
+
+export const categoriesKeys = {
+  all: ["categories"],
+  lists: () => [...categoriesKeys.all, "list"],
+};
