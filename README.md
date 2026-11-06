@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Greenhouse Admin Panel — Next.js and TypeScript
 
-## Getting Started
+A Next.js App Router dashboard for greenhouse plant administration. It combines a typed React interface, validated plant forms, and API-backed plant operations.
 
-First, run the development server:
+[Read the detailed technical documentation](./TECHNICAL_DOCUMENTATION.md).
+
+## Features
+
+- Login interface and dashboard route gating
+- Plant list, creation, editing, preview, deletion, and image upload service operations
+- Plant form validation with Zod, including required fields and temperature-range validation
+- React Hook Form for form state
+- Axios-based API requests and TanStack Query for client-side data fetching
+- Persian-language dashboard interface
+- Framer Motion for interface transitions
+
+The content list currently reads sample content from local data rather than a complete API-backed content-management workflow. The backend API is external and is not included in this repository.
+
+## Technology
+
+- Next.js 16 App Router
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- TanStack Query
+- Axios
+- React Hook Form and Zod
+- Framer Motion
+- ESLint
+
+## Requirements and configuration
+
+Install the project's dependencies:
+
+```bash
+npm install
+```
+
+The application expects an API base URL in `.env.local`:
+
+```dotenv
+NEXT_PUBLIC_API_URL=<your API base URL>
+```
+
+The API service is not part of this repository. Use a valid development or deployment API URL supplied by that service; no endpoint value or credentials are included here.
+
+## Run locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The development script starts Next.js on port `5173`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Other scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+npm run lint
+```
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```text
+src/
+  app/          App Router pages, dashboard layouts, and login route handler
+  components/   Dashboard, plant, status, and form components
+  data/         Dashboard and sample content data
+  hooks/        Authentication and plant data hooks
+  lib/          Authentication helpers and plant data mapping
+  schemas/      Zod validation schemas
+  services/     API service functions and Axios configuration
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Current scope and limitations
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- The backend is external. Plant data and login operations require its API and a valid environment configuration.
+- The content listing uses local sample data; do not describe it as a complete API-backed content-management system.
+- The dashboard proxy checks for a token cookie to gate dashboard navigation; backend authorization remains the responsibility of the API.
+- No screenshots, automated test suite, or GitHub Actions workflow were present during the repository audit.
+- Do not commit `.env.local`, credentials, or real user data.
